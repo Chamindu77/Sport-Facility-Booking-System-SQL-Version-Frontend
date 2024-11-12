@@ -192,7 +192,7 @@ const LogoutNavbar = ({ logout }) => {
                         onClick={() => setIsCoachProfileModalOpen(true)} // Open the settings modal on click
                         className="flex items-center px-2 py-1 rounded-full hover:bg-gray-200"
                     >
-                        <FaUserCircle className="text-3xl text-black" />
+                        <FaUserCircle className="text-3xl text-neutral-600" />
                     </button>
 
                     <button

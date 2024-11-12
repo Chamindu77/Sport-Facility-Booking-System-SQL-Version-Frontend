@@ -145,7 +145,7 @@ const RegisterCoachProfileForm = ({ onCancel }) => {
         toast.success('Profile uploaded successfully!');
         setFormModified(false);
         resetForm();
-        navigate('/login');
+        navigate('/');
       }, 3000);
 
 

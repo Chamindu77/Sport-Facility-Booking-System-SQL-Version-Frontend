@@ -36,7 +36,7 @@ const App = () => {
           <Route path="/login" element={<Login />} />
 
           <Route path="/auth/google/callback" element={<GoogleAuthRedirect />} />
-          
+
           <Route path="/equipment" element={
             <ProtectedRoute>
               <EquipmentPage />
@@ -116,6 +116,7 @@ const App = () => {
             <RegisterCoachProfileForm />
           }
           />
+          
 
           <Route path="/user-managment" element={
 

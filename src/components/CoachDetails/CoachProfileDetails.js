@@ -118,9 +118,9 @@ const CoachProfileForm = ({ coachData = {}, onCancel }) => {
         });
 
         const data = response.data;
-        
+console.log("get response data",data);
         setFormData({
-          CoachProfileId: data._id,
+          CoachProfileId: data.coachProfileId,    
           coachName: data.coachName,
           coachLevel: data.coachLevel,
           coachingSport: data.coachingSport,
@@ -179,13 +179,13 @@ const CoachProfileForm = ({ coachData = {}, onCancel }) => {
     e.preventDefault();
     try {
       const token = localStorage.getItem('token');
-
+      console.log("updateProfile",formData.CoachProfileId);
       const updateProfileResponse = await axios.put(
         `http://localhost:5000/api/v1/coach-profile/${formData.CoachProfileId}`,
         formData,
         { headers: { 'x-auth-token': token } }
       );
-
+      
       console.log('Profile updated:', updateProfileResponse.data);
 
       if (formData.coachImage && typeof formData.coachImage !== 'string') {
