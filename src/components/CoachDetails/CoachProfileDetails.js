@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
+import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const CoachProfileForm = ({ coachData = {}, onCancel }) => {
@@ -179,14 +179,16 @@ console.log("get response data",data);
     e.preventDefault();
     try {
       const token = localStorage.getItem('token');
-      console.log("updateProfile",formData.CoachProfileId);
+      //console.log("updateProfile",formData.CoachProfileId);
       const updateProfileResponse = await axios.put(
         `http://localhost:5000/api/v1/coach-profile/${formData.CoachProfileId}`,
         formData,
         { headers: { 'x-auth-token': token } }
+
       );
       
       console.log('Profile updated:', updateProfileResponse.data);
+      
 
       if (formData.coachImage && typeof formData.coachImage !== 'string') {
         const formDataImage = new FormData();
@@ -207,23 +209,24 @@ console.log("get response data",data);
       }
 
       toast.success('Profile updated successfully!');
-      setFormModified(false);
-      navigate('/');
+       setFormModified(false);
+      //  navigate('/');
     } catch (error) {
       console.error('Error updating profile:', error);
-      toast.error('Failed to update the profile.');
+      //toast.error('Failed to update the profile.');
     }
   };
 
   const handleCancel = () => {
     setFormData({ ...initialData });
-    setImagePreview(initialData.coachImage || '');
+    setImagePreview(initialData.coachImage || '' || null);
     setFormModified(false);
     navigate('/');
   };
   
   return (
     <>
+    {/* <ToastContainer /> */}
       <form
         onSubmit={handleFormSubmit}
         className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-xl space-y-4"
@@ -429,7 +432,7 @@ console.log("get response data",data);
           </button>
         </div>
       </form>
-      <ToastContainer />  {/* Toast Container for notifications */}
+      {/* <ToastContainer />   Toast Container for notifications */}
     </>
   );
 };

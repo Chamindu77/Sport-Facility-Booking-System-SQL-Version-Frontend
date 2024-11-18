@@ -54,28 +54,34 @@ const GoogleAuthRedirect = () => {
         const role = decodedToken.role;
         console.log('Decoded token role:', role);
 
-
-        try {
-          const response = await axios.get(`http://localhost:5000/api/v1/coach-profile/coach/${userId}`, {
-            headers: { 'x-auth-token': token },
-          });
-          
-          if (response.status === 200) {
-            navigate('/');
-          } else if (response.status === 404) {
-            navigate('/coach-register-details');
-          } else {
-            console.error('Unexpected response status:', response.status);
-            navigate('/login');
-          }
-        } catch (error) {
-          if (error.response && error.response.status === 404) {
-            navigate('/coach-register-details');
-          } else {
-            console.error('Failed to fetch coach profile:', error);
-            navigate('/login');
-          }
+        if (role === 'User') {
+          navigate('/');
         }
+        else {
+          try {
+            const response = await axios.get(`http://localhost:5000/api/v1/coach-profile/coach/${userId}`, {
+              headers: { 'x-auth-token': token },
+            });
+
+            if (response.status === 200) {
+              navigate('/');
+            } else if (response.status === 404) {
+              navigate('/coach-register-details');
+            } else {
+              console.error('Unexpected response status:', response.status);
+              navigate('/login');
+            }
+          } catch (error) {
+            if (error.response && error.response.status === 404) {
+              navigate('/coach-register-details');
+            } else {
+              console.error('Failed to fetch coach profile:', error);
+              navigate('/login');
+            }
+          }
+
+        }
+
       } else {
         console.error('No token found in the URL');
         navigate('/login');
