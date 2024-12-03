@@ -68,10 +68,8 @@ export const login = (email, password) => async (dispatch) => {
     // Store the token in localStorage
     localStorage.setItem('token', res.data.token);
 
-    // Show a success message for login
     toast.success('Login successful!');
 
-    // Redirect based on user role after 2 seconds
     setTimeout(() => {
       if (decoded.role === 'Admin') {
         window.location.href = '/user-managment'; // Redirect Admin to the user management page
@@ -81,7 +79,7 @@ export const login = (email, password) => async (dispatch) => {
     }, 2000);
     console.log(decoded.role);
   } catch (err) {
-    // Dispatch login fail action
+
     dispatch({
       type: LOGIN_FAIL,
     });
@@ -106,61 +104,6 @@ export const login = (email, password) => async (dispatch) => {
   }
 };
 
-// export const login = (email, password, role) => async (dispatch) => {
-//   const config = {
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//   };
-
-//   const body = JSON.stringify({ email, password, role });
-
-//   try {
-//     const res = await axios.post('http://localhost:5000/api/v1/auth/login', body, config);
-//     const decoded = jwtDecode(res.data.token);
-
-//     dispatch({
-//       type: LOGIN_SUCCESS,
-//       payload: { 
-//         token: res.data.token,
-//         user: decoded,
-//       },
-//     });
-
-//     localStorage.setItem('token', res.data.token);
-//     toast.success('Login successful!');
-
-//     setTimeout(() => {
-//       if (decoded.role === 'Admin') {
-//         window.location.href = '/user-management'; // Fixed typo: 'user-managment' to 'user-management'
-//       } else {
-//         window.location.href = '/';
-//       }
-//     }, 2000);
-//   } catch (err) {
-//     dispatch({
-//       type: LOGIN_FAIL,
-//     });
-
-//     // Handle errors
-//     if (err.response && err.response.data.msg) {
-//       const message = err.response.data.msg;
-//       if (message === 'User not found') {
-//         toast.error('User not found. Please check your email and try again.');
-//       } else if (message === 'Invalid Password') {
-//         toast.error('Invalid Password. Please check your password and try again.');
-//       } else if (message === 'Account is deactivated') {
-//         toast.error('Your account is deactivated. Please contact support.');
-//       } else if (message === 'Role mismatch') {
-//         toast.error('Role mismatch. Please check your role selection and try again.');
-//       } else {
-//         toast.error(message);
-//       }
-//     } else {
-//       toast.error('Login failed. Please check your credentials and try again.');
-//     }
-//   }
-// };
 
 // Logout User
 export const logout = () => dispatch => {

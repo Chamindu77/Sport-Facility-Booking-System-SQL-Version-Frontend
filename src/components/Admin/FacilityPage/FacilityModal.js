@@ -43,10 +43,10 @@ const FacilityModal = ({ facility, isOpen, onClose, onSave }) => {
     try {
       const token = localStorage.getItem('token');
       let response;
-      if (facility?._id) {
+      if (facility?.facilityId) {
         // Update facility case
         response = await axios.put(
-          `http://localhost:5000/api/v1/facilities/${facility._id}`,
+          `http://localhost:5000/api/v1/facilities/${facility.facilityId}`,
           formData,
           { headers: { 'x-auth-token': token, 'Content-Type': 'multipart/form-data' } }
         );

@@ -25,7 +25,7 @@ const Registration = ({ register }) => {
     resolver: yupResolver(schema),
   });
 
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate(); 
 
   const onSubmit = async (data) => {
     try {

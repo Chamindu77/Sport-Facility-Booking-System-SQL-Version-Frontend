@@ -40,7 +40,7 @@ const SportCard = ({ facility, onDelete }) => {
     if (confirmDelete) {
       try {
         const token = localStorage.getItem('token'); 
-        await axios.delete(`http://localhost:5000/api/v1/facilities/${facility._id}`, {
+        await axios.delete(`http://localhost:5000/api/v1/facilities/${facility.facilityId}`, {
           headers: {
             'x-auth-token': token,
           },
@@ -69,7 +69,7 @@ const SportCard = ({ facility, onDelete }) => {
     try {
       const token = localStorage.getItem('token');
       const response = await axios.put(
-        `http://localhost:5000/api/v1/facilities/toggle/${facility._id}`,
+        `http://localhost:5000/api/v1/facilities/toggle/${facility.facilityId}`,
         {},
         {
           headers: {

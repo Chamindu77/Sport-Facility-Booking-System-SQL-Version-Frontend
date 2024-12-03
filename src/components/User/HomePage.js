@@ -41,8 +41,8 @@ const HomePage = () => {
       {/* Navbar based on role */}
       {role === 'User' && (isLoggedIn ? <LogoutNavbar /> : <Navbar />)}
       {role === 'Coach' && (isLoggedIn ? <CoachLogoutNavbar /> : <CoachNavbar />)}
-      {!role && <DefNavbar />} {/* Default Navbar if no role is found */}
-
+      {!role && <DefNavbar />} 
+      
       {/* Hero Section */}
       <div className="relative h-screen bg-cover bg-center" style={{ backgroundImage: `url(${backgroundImage})` }}>
         <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black opacity-70"></div>
